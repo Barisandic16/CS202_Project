@@ -1,8 +1,14 @@
-for i in range(0,50):
-    print(float(i/50))
-    print("hello")
-    if (i % 2 == 0):
-        print(10)
+# app.py
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return "Selamın aleyküm ve rahmetullah.<br>Ve aleyna aleyküm es selam."
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 
 
 
