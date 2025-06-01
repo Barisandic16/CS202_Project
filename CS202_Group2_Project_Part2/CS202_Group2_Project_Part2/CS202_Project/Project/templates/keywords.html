@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keywords</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Keywords</h1>
+    <form method="post">
+        <input type="text" name="key_text" placeholder="Add a new keyword" required>
+        <button type="submit">Add</button>
+    </form>
+    <h2>Current Keywords</h2>
+    <ul>
+        {% for k in keywords %}
+            <li>{{ k.key_text }}</li>
+        {% else %}
+            <li>No keywords yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="/restaurant">Back to Restaurant Dashboard</a>
+</body>
+</html>

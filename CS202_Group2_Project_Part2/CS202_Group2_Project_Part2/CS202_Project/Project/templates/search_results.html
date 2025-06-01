@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Restaurant Search Results</h2>
+    <ul>
+    {% for r in restaurants %}
+        <li>
+            {{ r.name }} - {{ r.cuisine_type }} - {{ r.adress }}<br>
+            {% if r.total_reviews < 10 %}
+                Rating: New
+            {% else %}
+                Rating: {{ r.avg_rating }}
+            {% endif %}
+            <form action="{{ url_for('search_menu') }}" method="get">
+                <input type="hidden" name="keyword" value="{{ keyword }}">
+                <button type="submit">View Menu</button>
+            </form>
+
+        </li>
+    {% endfor %}
+    </ul>
+    <p><a href="/customer">Back to Dashboard</a></p>
+</body>
+</html>

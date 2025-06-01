@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Incoming Orders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Incoming Orders</h2>
+    <ul>
+    {% for order in orders %}
+        <li>Cart ID: {{ order.cart_id }}, Customer ID: {{ order.customer_id }}, Item: {{ order.item_name }}, Qty: {{ order.quantity }}
+        <a href="/restaurant/orders/accept/{{ order.cart_id }}">Accept</a></li>
+    {% endfor %}
+    </ul>
+    <p><a href="/restaurant">Back to Dashboard</a></p>
+</body>
+</html>

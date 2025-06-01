@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu Results for "{{ keyword }}"</title>
+</head>
+<body>
+    <h2>Menu Items Matching "{{ keyword }}"</h2>
+
+    {% if items %}
+        <ul>
+        {% for item in items %}
+            <li>
+                <strong>{{ item.name }}</strong><br>
+                {{ item.description }}<br>
+
+                {% if item.dis_percentage and item.dis_end_date >= now().date() %}
+                    <del>{{ item.price }}</del> → {{ item.effective_price }} ({{ item.dis_percentage }}% off until {{ item.dis_end_date }})
+                {% else %}
+                    Price: {{ item.effective_price }}
+                {% endif %}
+
+                <br>
+                From: {{ item.restaurant_name }}<br>
+
+                <form action="/customer/cart/add/{{ item.item_id }}" method="post">
+                    Quantity: <input type="number" name="quantity" value="1" min="1">
+                    <input type="submit" value="Add to Cart">
+                </form>
+            </li>
+            <hr>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No menu items found for "{{ keyword }}".</p>
+    {% endif %}
+
+    <p><a href="/customer/menu/search">Search Again</a></p>
+</body>
+</html>

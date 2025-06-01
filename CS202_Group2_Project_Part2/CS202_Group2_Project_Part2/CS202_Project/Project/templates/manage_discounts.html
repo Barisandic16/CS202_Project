@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Discounts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Set Discounts for Menu Items</h2>
+
+    {% for item in items %}
+        <form method="post" style="margin-bottom: 20px;">
+            <strong>{{ item.name }}</strong><br>
+            Current Discount: {{ item.dis_percentage or 0 }}% until {{ item.dis_end_date or 'N/A' }}<br>
+            New Discount (%): <input type="number" step="0.01" name="dis_percentage" min="0" max="100" required>
+            End Date: <input type="date" name="dis_end_date" required>
+            <input type="hidden" name="item_id" value="{{ item.item_id }}">
+            <input type="submit" value="Apply">
+        </form>
+    {% endfor %}
+
+    <p><a href="/restaurant">Back to Dashboard</a></p>
+</body>
+</html>

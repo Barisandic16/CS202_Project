@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rate Your Orders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Rate Your Accepted Orders</h2>
+
+    {% if carts %}
+        <ul>
+        {% for cart in carts %}
+            <li>
+                <strong>{{ cart.restaurant_name }}</strong> - {{ cart.item_name }} (Qty: {{ cart.quantity }})
+                <form method="post" style="margin-top: 5px;">
+                    <input type="hidden" name="cart_id" value="{{ cart.cart_id }}">
+                    <input type="hidden" name="restaurant_id" value="{{ cart.restaurant_id }}">
+                    Rating (1 to 5): <input type="number" name="rating" min="1" max="5" required><br>
+                    {% if cart.timestamp + timedelta(hours=24) >= now() %}
+                        Comment: <textarea name="comment"></textarea><br>
+                    {% else %}
+                        <em>Comment window (24h) expired</em>
+                        <input type="hidden" name="comment" value="">
+                    {% endif %}
+                    <input type="submit" value="Submit Rating">
+                </form>
+                <hr>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No unrated accepted orders available.</p>
+    {% endif %}
+
+    <h2>My Previous Ratings</h2>
+
+    {% if ratings %}
+        <ul>
+        {% for r in ratings %}
+            <li>
+                <strong>{{ r.restaurant_name }}</strong> - {{ r.item_name }}<br>
+                Rated: {{ r.rate }} / 5<br>
+                {% if r.comment %}
+                    Comment: {{ r.comment }}<br>
+                {% else %}
+                    <em>No comment provided</em><br>
+                {% endif %}
+                Order Date: {{ r.timestamp.strftime('%Y-%m-%d %H:%M') }}<br>
+                <hr>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't submitted any ratings yet.</p>
+    {% endif %}
+
+    <p><a href="/customer">Back to Dashboard</a></p>
+</body>
+</html>

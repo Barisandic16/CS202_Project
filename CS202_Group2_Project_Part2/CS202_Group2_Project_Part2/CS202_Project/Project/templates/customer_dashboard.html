@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Welcome, customer!</h2>
+
+    <form action="/customer/search" method="get">
+        <label for="keyword">Search Restaurants by Keyword:</label><br>
+        <input type="text" name="keyword" id="keyword" placeholder="e.g. Çiğköfte, Lahmacun" required>
+        <input type="submit" value="Search">
+    </form>
+
+    <h3>Your Cart</h3>
+    <form action="/customer/cart/view" method="get">
+        <input type="submit" value="View Cart">
+    </form>
+
+    <h3>Rate a Restaurant</h3>
+    <form action="/customer/rate" method="get">
+        <input type="submit" value="Rate Order">
+    </form>
+
+    <p><a href="/logout">Logout</a></p>
+</body>
+</html>

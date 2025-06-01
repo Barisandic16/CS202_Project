@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Restaurant Menu</h2>
+    <form method="post">
+        Name: <input type="text" name="name"><br>
+        Description: <input type="text" name="description"><br>
+        Price: <input type="text" name="price"><br>
+        Image: <input type="text" name="image"><br>
+        Extra: <input type="text" name ="extra"><br>
+        <input type="submit" value="Add Menu Item">
+    </form>
+    <h3>Current Menu Items</h3>
+    <ul>
+    {% for item in items %}
+        <li>{{ item.name }} - {{ item.description }} - {{ item.price }} TL - {{ item.image }}</li>
+    {% endfor %}
+    </ul>
+    <p><a href="/restaurant">Back to Dashboard</a></p>
+</body>
+</html>

@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Statistics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Monthly Statistics</h2>
+    <p>Total Orders: {{ summary.total_orders }}</p>
+    <p>Total Revenue: {{ summary.total_revenue }}</p>
+
+    <h3>Item Sales</h3>
+    <ul>
+    {% for item in item_stats %}
+        <li>{{ item.name }} - Sold: {{ item.total_sold }}, Revenue: {{ item.revenue }}</li>
+    {% endfor %}
+    </ul>
+
+    <h3>Top Customer (by order count - last 30 days)</h3>
+    {% if top_customer %}
+        <p>{{ top_customer.customer_name }} ({{ top_customer.order_count }} orders)</p>
+    {% else %}
+        <p>N/A</p>
+    {% endif %}
+
+
+    <h3>Highest Value Cart (last 30 days)</h3>
+    {% if high_value_customer %}
+        <p>Customer: {{ high_value_customer.customer_name }}</p>
+        <p>Cart ID: {{ high_value_customer.cart_id }}</p>
+        <p>Item: {{ high_value_customer.item_name }}</p>
+        <p>Quantity: {{ high_value_customer.quantity }}</p>
+        <p>Total Value: {{ high_value_customer.total }}</p>
+        <p>Timestamp: {{ high_value_customer.timestamp }}</p>
+    {% else %}
+        <p>N/A</p>
+    {% endif %}
+
+
+    <p><a href="/restaurant">Back to Dashboard</a></p>
+</body>
+</html>

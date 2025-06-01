@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Welcome, Restaurant Manager!</h2>
+
+    <h3>Manage Your Restaurant</h3>
+    <ul>
+        <li><a href="/restaurant/menu">Manage Menu Items</a></li>
+        <li><a href="/restaurant/orders">View & Accept Orders</a></li>
+        <li><a href="/restaurant/stats">View Monthly Statistics</a></li>
+        <li><a href="/restaurant/keywords">Keywords</a></li>
+        <li><a href="/restaurant/discounts">Add Discount</a></li>
+    </ul>
+
+    <p><a href="/logout">Logout</a></p>
+</body>
+</html>
